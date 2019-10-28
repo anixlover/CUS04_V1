@@ -1,0 +1,68 @@
+﻿@model IEnumerable<CUS_Mostrar_Resultados.Models.TUsuarioModalidadTanda>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">
+                    C&oacute;digo de Participante
+            </th>
+            <th>
+                Modalidad
+            </th>
+            <th>
+                Categoría
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FkIumtCodPartNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FkIumtCodTanNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.FkIumtCodPartNavigation.PkIumCodUm)
+            </td>
+            <td>
+                @if (item.FkIumtCodPartNavigation.FkImIdModalidad == 2)
+                {
+                    <p>Novel</p>
+                }
+                @if (item.FkIumtCodPartNavigation.FkImIdModalidad == 1)
+                {
+                    <p> Seriado </p>
+                }
+                @*@Html.DisplayFor(modelItem => item.FkIumtCodPartNavigation.FkImIdModalidad)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkIumtCodPartNavigation.FkIuDniNavigation.FkIuCodCategoria)
+                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkIumtCodPartNavigation.FkIuDni)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkIumtCodTanNavigation.VtDescripcion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PkVumtCod">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PkVumtCod">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PkVumtCod">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
